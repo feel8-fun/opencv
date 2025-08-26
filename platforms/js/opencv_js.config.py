@@ -175,6 +175,13 @@ video = {
     "SparsePyrLKOpticalFlow": ["getWinSize","setWinSize","getMaxLevel","setMaxLevel","getTermCriteria","setTermCriteria","getFlags","setFlags","getMinEigThreshold","setMinEigThreshold","create"]
 }
 
+tracking = {
+    "TrackerCSRT": ["create", "setInitialMask"],
+    "TrackerCSRT_Params": [],
+    "TrackerKCF": ["create"],
+    "TrackerKCF_Params": []
+}
+
 dnn = {'dnn_Net': ['setInput', 'forward', 'setPreferableBackend','getUnconnectedOutLayersNames'],
        '': ['readNetFromCaffe', 'readNetFromTensorflow', 'readNetFromTorch', 'readNetFromDarknet',
             'readNetFromONNX', 'readNetFromTFLite', 'readNet', 'blobFromImage']}
@@ -240,7 +247,7 @@ calib3d = {
 
 
 
-white_list = makeWhiteList([core, imgproc, objdetect, video, dnn, features2d, photo, calib3d])
+white_list = makeWhiteList([core, imgproc, objdetect, video, dnn, features2d, photo, calib3d, tracking])
 
 # namespace_prefix_override['dnn'] = ''  # compatibility stuff (enabled by default)
 # namespace_prefix_override['aruco'] = ''  # compatibility stuff (enabled by default)

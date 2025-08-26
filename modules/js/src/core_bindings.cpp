@@ -88,6 +88,7 @@ using namespace emscripten;
 using namespace cv;
 
 using namespace cv::segmentation;  // FIXIT
+using namespace cv::tracking;
 
 #ifdef HAVE_OPENCV_OBJDETECT
 using namespace cv::aruco;
@@ -105,6 +106,11 @@ typedef SimpleBlobDetector::Params SimpleBlobDetector_Params;
 
 #ifdef HAVE_OPENCV_VIDEO
 typedef TrackerMIL::Params TrackerMIL_Params;
+#endif
+
+#ifdef HAVE_OPENCV_TRACKING
+typedef TrackerCSRT::Params TrackerCSRT_Params;
+typedef TrackerKCF::Params TrackerKCF_Params;
 #endif
 
 // HACK: JS generator ommits namespace for parameter types for some reason. Added typedef to handle std::string correctly
