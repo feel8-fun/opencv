@@ -12,6 +12,10 @@
         "BackgroundSubtractorMOG2": ["BackgroundSubtractorMOG2", "apply"],
         "BackgroundSubtractor": ["apply", "getBackgroundImage"],
         "TrackerMIL": ["create"],
-        "TrackerMIL_Params": []
+        "TrackerMIL_Params": [],
+        "KalmanFilter": ["KalmanFilter","init", "predict", "correct"],
+        "FarnebackOpticalFlow": ["create", "getNumLevels", "getNumLevels", "setNumLevels", "getPyrScale", "setPyrScale", "getFastPyramids", "setFastPyramids", "getWinSize", "setWinSize", "getNumIters", "setNumIters", "getPolyN", "setPolyN", "getPolySigma", "setPolySigma", "getFlags", "setFlags"],
+        "DISOpticalFlow": ["getFinestScale", "setFinestScale", "getPatchSize", "setPatchSize", "getPatchStride", "setPatchStride", "getGradientDescentIterations", "setGradientDescentIterations", "getVariationalRefinementIterations", "setVariationalRefinementIterations", "getVariationalRefinementAlpha", "setVariationalRefinementAlpha", "getVariationalRefinementDelta", "setVariationalRefinementDelta", "getVariationalRefinementGamma", "setVariationalRefinementGamma", "getVariationalRefinementEpsilon", "setVariationalRefinementEpsilon", "getUseMeanNormalization", "setUseMeanNormalization", "getUseSpatialPropagation", "setUseSpatialPropagation", "create"],
+        "SparsePyrLKOpticalFlow": ["getWinSize","setWinSize","getMaxLevel","setMaxLevel","getTermCriteria","setTermCriteria","getFlags","setFlags","getMinEigThreshold","setMinEigThreshold","create"]
     }
 }

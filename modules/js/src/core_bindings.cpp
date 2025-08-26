@@ -393,6 +393,25 @@ namespace binding_utils
         result.call<void>("push", rect);
         return result;
     }
+
+    emscripten::val DenseOpticalFlow_calc_wrapper(cv::DenseOpticalFlow& self, const cv::Mat& prevImg, const cv::Mat& nextImg)
+    {
+        cv::Mat flow;
+        self.calc(prevImg, nextImg, flow);
+        return emscripten::val(flow);
+    }
+
+    emscripten::val SparseOpticalFlow_calc_wrapper(cv::SparseOpticalFlow& self, const cv::Mat& prevImg, const cv::Mat& nextImg, const cv::Mat& prevPts)
+    {
+        cv::Mat nextPts, status, error;
+        self.calc(prevImg, nextImg, prevPts, nextPts, status, error);
+        emscripten::val result = emscripten::val::array();
+        result.call<void>("push", nextPts);
+        result.call<void>("push", status);
+        result.call<void>("push", error);
+        return result;
+    }
+
 #endif  // HAVE_OPENCV_VIDEO
 
     std::string getExceptionMsg(const cv::Exception& e) {
@@ -707,6 +726,13 @@ EMSCRIPTEN_BINDINGS(binding_utils)
     emscripten::class_<cv::Tracker >("Tracker")
         .function("init", select_overload<void(cv::Tracker&,const cv::Mat&,const Rect&)>(&binding_utils::Tracker_init_wrapper), pure_virtual())
         .function("update", select_overload<emscripten::val(cv::Tracker&,const cv::Mat&)>(&binding_utils::Tracker_update_wrapper), pure_virtual());
+    
+    emscripten::class_<cv::DenseOpticalFlow ,base<Algorithm> >("DenseOpticalFlow")
+        .function("calc",  select_overload<emscripten::val(cv::DenseOpticalFlow&,const cv::Mat&,const cv::Mat&)>(&binding_utils::DenseOpticalFlow_calc_wrapper), pure_virtual())
+        .function("collectGarbage", &cv::DenseOpticalFlow::collectGarbage, pure_virtual());
+
+    emscripten::class_<cv::SparseOpticalFlow ,base<Algorithm> >("SparseOpticalFlow")
+        .function("calc",  select_overload<emscripten::val(cv::SparseOpticalFlow&,const cv::Mat&,const cv::Mat&,const cv::Mat&)>(&binding_utils::SparseOpticalFlow_calc_wrapper), pure_virtual());
 #endif
 
 #ifdef HAVE_PTHREADS_PF

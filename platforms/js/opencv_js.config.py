@@ -168,6 +168,11 @@ video = {
     # issue #21070: 'Tracker': ['init', 'update'],
     'TrackerMIL': ['create'],
     'TrackerMIL_Params': [],
+    "KalmanFilter": ["init", "predict", "correct"],
+    "FarnebackOpticalFlow": ["create", "getNumLevels", "getNumLevels", "setNumLevels", "getPyrScale", "setPyrScale", "getFastPyramids", "setFastPyramids", "getWinSize", "setWinSize", "getNumIters", "setNumIters", "getPolyN", "setPolyN", "getPolySigma", "setPolySigma", "getFlags", "setFlags"],
+    "VariationalRefinement": ["calcUV","getFixedPointIterations","setFixedPointIterations","getSorIterations","setSorIterations","getOmega","setOmega","getAlpha","setAlpha","getDelta","setDelta","getGamma","setGamma","getEpsilon","setEpsilon","create"],
+    "DISOpticalFlow": ["getFinestScale", "setFinestScale", "getPatchSize", "setPatchSize", "getPatchStride", "setPatchStride", "getGradientDescentIterations", "setGradientDescentIterations", "getVariationalRefinementIterations", "setVariationalRefinementIterations", "getVariationalRefinementAlpha", "setVariationalRefinementAlpha", "getVariationalRefinementDelta", "setVariationalRefinementDelta", "getVariationalRefinementGamma", "setVariationalRefinementGamma", "getVariationalRefinementEpsilon", "setVariationalRefinementEpsilon", "getUseMeanNormalization", "setUseMeanNormalization", "getUseSpatialPropagation", "setUseSpatialPropagation", "create"],
+    "SparsePyrLKOpticalFlow": ["getWinSize","setWinSize","getMaxLevel","setMaxLevel","getTermCriteria","setTermCriteria","getFlags","setFlags","getMinEigThreshold","setMinEigThreshold","create"]
 }
 
 dnn = {'dnn_Net': ['setInput', 'forward', 'setPreferableBackend','getUnconnectedOutLayersNames'],
@@ -232,6 +237,8 @@ calib3d = {
     ],
     'UsacParams': ['UsacParams']
 }
+
+
 
 white_list = makeWhiteList([core, imgproc, objdetect, video, dnn, features2d, photo, calib3d])
 
