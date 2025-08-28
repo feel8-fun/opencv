@@ -400,22 +400,14 @@ namespace binding_utils
         return result;
     }
 
-    emscripten::val DenseOpticalFlow_calc_wrapper(cv::DenseOpticalFlow& self, const cv::Mat& prevImg, const cv::Mat& nextImg)
+    void DenseOpticalFlow_calc_wrapper(cv::DenseOpticalFlow& arg0, const cv::Mat& arg1, const cv::Mat& arg2, cv::Mat& arg3)
     {
-        cv::Mat flow;
-        self.calc(prevImg, nextImg, flow);
-        return emscripten::val(flow);
+        arg0.calc(arg1, arg2, arg3);
     }
 
-    emscripten::val SparseOpticalFlow_calc_wrapper(cv::SparseOpticalFlow& self, const cv::Mat& prevImg, const cv::Mat& nextImg, const cv::Mat& prevPts)
+    void SparseOpticalFlow_calc_wrapper(cv::SparseOpticalFlow& arg0, const cv::Mat& arg1, const cv::Mat& arg2, const cv::Mat& arg3, cv::Mat& arg4, cv::Mat& arg5, cv::Mat& arg6)
     {
-        cv::Mat nextPts, status, error;
-        self.calc(prevImg, nextImg, prevPts, nextPts, status, error);
-        emscripten::val result = emscripten::val::array();
-        result.call<void>("push", nextPts);
-        result.call<void>("push", status);
-        result.call<void>("push", error);
-        return result;
+        arg0.calc(arg1, arg2, arg3, arg4, arg5, arg6);
     }
 
 #endif  // HAVE_OPENCV_VIDEO
@@ -734,11 +726,11 @@ EMSCRIPTEN_BINDINGS(binding_utils)
         .function("update", select_overload<emscripten::val(cv::Tracker&,const cv::Mat&)>(&binding_utils::Tracker_update_wrapper), pure_virtual());
     
     emscripten::class_<cv::DenseOpticalFlow ,base<Algorithm> >("DenseOpticalFlow")
-        .function("calc",  select_overload<emscripten::val(cv::DenseOpticalFlow&,const cv::Mat&,const cv::Mat&)>(&binding_utils::DenseOpticalFlow_calc_wrapper), pure_virtual())
+        .function("calc", select_overload<void(cv::DenseOpticalFlow&,const cv::Mat&,const cv::Mat&,cv::Mat&)>(&binding_utils::DenseOpticalFlow_calc_wrapper), pure_virtual())
         .function("collectGarbage", &cv::DenseOpticalFlow::collectGarbage, pure_virtual());
 
     emscripten::class_<cv::SparseOpticalFlow ,base<Algorithm> >("SparseOpticalFlow")
-        .function("calc",  select_overload<emscripten::val(cv::SparseOpticalFlow&,const cv::Mat&,const cv::Mat&,const cv::Mat&)>(&binding_utils::SparseOpticalFlow_calc_wrapper), pure_virtual());
+        .function("calc",  select_overload<void(cv::SparseOpticalFlow&,const cv::Mat&,const cv::Mat&,const cv::Mat&,cv::Mat&,cv::Mat&,cv::Mat&)>(&binding_utils::SparseOpticalFlow_calc_wrapper), pure_virtual());
 #endif
 
 #ifdef HAVE_PTHREADS_PF
